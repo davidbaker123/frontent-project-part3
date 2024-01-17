@@ -54,6 +54,10 @@ export class CategoryFormComponent implements OnInit {
     this.targetWord = '';
   }
 
+  deleteWord(origin : string) {
+    this.currentCategory.words.delete(origin);
+  }
+
   saveCategory() {
     if (this.id) {
       this.categoriesService.update(this.currentCategory);
