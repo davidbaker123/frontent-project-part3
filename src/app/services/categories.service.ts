@@ -25,11 +25,14 @@ export class CategoriesService {
   }
 
   update(category : Category) : void {
+    category.lastUpdateDate = new Date();
     this.categories.set(category.id, category);
   }
 
   add(category : Category) : void {
-    this.categories.set(this.nextId, category);
+    category.id = this.nextId;
+    category.lastUpdateDate = new Date();
+    this.categories.set(category.id, category);
     ++this.nextId;
   }
 }

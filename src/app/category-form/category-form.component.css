@@ -1,0 +1,7 @@
+.new-word-container {
+  display: flex;
+}
+
+.new-word-element {
+  padding-right: 8px;
+}
