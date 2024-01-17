@@ -1,6 +1,6 @@
 import { CategoriesService } from './../services/categories.service';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Language } from '../../shared/model/language';
 import { Category } from '../../shared/model/category';
 import { FormsModule } from '@angular/forms';
@@ -26,14 +26,27 @@ import { Router } from '@angular/router';
   templateUrl: './category-form.component.html',
   styleUrl: './category-form.component.css',
 })
-export class CategoryFormComponent { 
+export class CategoryFormComponent implements OnInit { 
   currentCategory = new Category(0,"", Language.English, Language.Hebrew);
   originWord = '';
   targetWord = '';
   displayedColumns: string[] = ["Origin", "Target", "Actions"];
 
+  @Input()
+  id? : string;
+
   constructor(private categoriesService : CategoriesService,
     private router : Router){}
+
+  ngOnInit(): void {
+    if (this.id) {
+      let categoryData = this.categoriesService.get(parseInt(this.id)); 
+
+      if (categoryData) {
+        this.currentCategory = categoryData;
+      }
+    }
+  }
 
   addWord() {
     this.currentCategory.words.set(this.originWord, this.targetWord);
@@ -42,7 +55,12 @@ export class CategoryFormComponent {
   }
 
   saveCategory() {
-    this.categoriesService.add(this.currentCategory);
+    if (this.id) {
+      this.categoriesService.update(this.currentCategory);
+    } else {
+      this.categoriesService.add(this.currentCategory);
+    }
+
     this.router.navigate(['']);
   }
 }
