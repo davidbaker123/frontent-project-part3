@@ -96,7 +96,7 @@
             type="submit"
             mat-raised-button
             color="primary"
-            [disabled]="currentCategory.words.size == 0 || categoryForm.invalid">
+            [disabled]="currentCategory.words.size == 0 || categoryForm.invalid || categoryForm.pristine">
         Save Category
         </button>
     </div>
