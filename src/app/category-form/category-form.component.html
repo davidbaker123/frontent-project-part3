@@ -20,27 +20,61 @@
     </div>
     <div>
         <div>
-            <h2>Words</h2>
-            <div *ngIf="currentCategory.words.size == 0">
+            <div class="new-word-container">
+                <h2>Words</h2>
+                <button 
+                    mat-fab
+                    type="button"
+                    color="primary"
+                    (click)="addWord()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+            <div *ngIf="currentCategory.words.length == 0">
                 A category must have at least one word
             </div>
-            <div *ngIf="currentCategory.words.size > 0">
-                <table mat-table [dataSource]="currentCategory.words | keyvalue">
+            <div *ngIf="currentCategory.words.length > 0">
+                <table mat-table [dataSource]="currentCategory.words">
                     <ng-container matColumnDef="Origin">
                         <th mat-header-cell *matHeaderCellDef>Origin</th>
-                        <td mat-cell *matCellDef="let word">{{word.key}}</td>
+                        <td mat-cell *matCellDef="let word">
+                            <mat-form-field>
+                                <input matInput 
+                                [(ngModel)]="word.origin" 
+                                name="origin-{{word.origin}}" 
+                                required
+                                pattern="^[a-zA-Z]+$"
+                                #originField="ngModel">
+                                <mat-error *ngIf="originField.invalid">
+                                    English letters only
+                                </mat-error>
+                            </mat-form-field>
+                        </td>
                     </ng-container>
 
                     <ng-container matColumnDef="Target">
                         <th mat-header-cell *matHeaderCellDef>Target</th>
-                        <td mat-cell *matCellDef="let word">{{word.value}}</td>
+                        <td mat-cell *matCellDef="let word">
+                            <mat-form-field>
+                                <input matInput 
+                                [(ngModel)]="word.target" 
+                                name="target-{{word.target}}" 
+                                required
+                                pattern="^[\u0590-\u05fe]+$"
+                                #targetField="ngModel">
+                                <mat-error *ngIf="targetField.invalid">
+                                    Hebrew letters only
+                                </mat-error>
+                            </mat-form-field>
+                        </td>
                     </ng-container>
 
                     <ng-container matColumnDef="Actions">
                         <th mat-header-cell *matHeaderCellDef>Actions</th>
-                        <td mat-cell *matCellDef="let word">
+                        <td mat-cell *matCellDef="let word; let index">
                             <button mat-icon-button
-                                (click)="deleteWord(word.key)">
+                                type="button"
+                                (click)="deleteWord(index)">
                                 <mat-icon>delete</mat-icon>
                             </button>
                         </td>
@@ -51,53 +85,14 @@
                 </table>
             </div>
         </div>
-        <div class="new-word-container">
-            <h2>New Word:</h2>
-            <div class="new-word-element">
-                <mat-form-field>
-                    <mat-label>Origin Word</mat-label>
-                    <input 
-                        matInput 
-                        [(ngModel)]="originWord"
-                        name="originWord"
-                        pattern="^[a-zA-Z]+$"
-                        #originWordInput="ngModel">
-                    <mat-error *ngIf="originWordInput.invalid">
-                        English letters only
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="new-word-element">
-                <mat-form-field>
-                    <mat-label>Target Word</mat-label>
-                    <input
-                        matInput
-                        [(ngModel)]="targetWord"
-                        name="targetWord"
-                        pattern="^[\u0590-\u05fe]+$"
-                        #targetWordInput="ngModel">
-                    <mat-error *ngIf="targetWordInput.invalid">
-                        Hebrew letters only
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="new-word-element">
-                <button 
-                    mat-fab 
-                    color="primary"
-                    [disabled]="targetWord == '' || originWord=='' || originWordInput.invalid || targetWordInput.invalid"
-                    (click)="addWord()">
-                    <mat-icon>add</mat-icon>
-                </button>
-            </div>
-        </div>
     </div>
     <div>
         <button
             type="submit"
             mat-raised-button
             color="primary"
-            [disabled]="currentCategory.words.size == 0 || categoryForm.invalid">
+            [disabled]="currentCategory.words.length == 0 || 
+                categoryForm.invalid">
         Save Category
         </button>
     </div>

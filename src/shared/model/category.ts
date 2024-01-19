@@ -1,4 +1,5 @@
 import { Language } from "./language";
+import { TranslatedWord } from "./translated-word";
 
 export class Category {
     id : number;
@@ -6,7 +7,7 @@ export class Category {
     origin : Language;
     target : Language;
     lastUpdateDate = new Date();
-    words = new Map<string, string>();
+    words : TranslatedWord[] = [];
 
     constructor(id: number,
         name : string,

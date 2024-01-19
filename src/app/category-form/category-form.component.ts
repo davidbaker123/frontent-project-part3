@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { TranslatedWord } from '../../shared/model/translated-word';
 
 @Component({
   selector: 'app-category-form',
@@ -28,8 +29,6 @@ import { Router } from '@angular/router';
 })
 export class CategoryFormComponent implements OnInit { 
   currentCategory = new Category(0,"", Language.English, Language.Hebrew);
-  originWord = '';
-  targetWord = '';
   displayedColumns: string[] = ["Origin", "Target", "Actions"];
 
   @Input()
@@ -49,13 +48,15 @@ export class CategoryFormComponent implements OnInit {
   }
 
   addWord() {
-    this.currentCategory.words.set(this.originWord, this.targetWord);
-    this.originWord = '';
-    this.targetWord = '';
-  }
+    let extendedWordsList = Array.from(this.currentCategory.words);
+    extendedWordsList.push(new TranslatedWord("", ""));
+    this.currentCategory.words = extendedWordsList;
+ }
 
-  deleteWord(origin : string) {
-    this.currentCategory.words.delete(origin);
+  deleteWord(index : number) {
+    let extendedWordsList = Array.from(this.currentCategory.words);
+    extendedWordsList.splice(index, 1)
+    this.currentCategory.words = extendedWordsList;
   }
 
   saveCategory() {
