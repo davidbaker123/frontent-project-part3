@@ -1,9 +1,9 @@
 import { CategoriesService } from './../services/categories.service';
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Language } from '../../shared/model/language';
 import { Category } from '../../shared/model/category';
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, NgModelGroup } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -34,6 +34,8 @@ export class CategoryFormComponent implements OnInit {
   @Input()
   id? : string;
 
+  @ViewChild('wordsGroup') wordsGroup? : NgModelGroup;
+
   constructor(private categoriesService : CategoriesService,
     private router : Router){}
 
@@ -48,15 +50,16 @@ export class CategoryFormComponent implements OnInit {
   }
 
   addWord() {
-    let extendedWordsList = Array.from(this.currentCategory.words);
-    extendedWordsList.push(new TranslatedWord("", ""));
-    this.currentCategory.words = extendedWordsList;
+    this.currentCategory.words = 
+      [...this.currentCategory.words, 
+        new TranslatedWord("", "")];
  }
 
   deleteWord(index : number) {
     let extendedWordsList = Array.from(this.currentCategory.words);
     extendedWordsList.splice(index, 1)
     this.currentCategory.words = extendedWordsList;
+    this.wordsGroup!.control.markAsDirty();
   }
 
   saveCategory() {

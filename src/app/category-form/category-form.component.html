@@ -33,7 +33,7 @@
             <div *ngIf="currentCategory.words.length == 0">
                 A category must have at least one word
             </div>
-            <div *ngIf="currentCategory.words.length > 0">
+            <div *ngIf="currentCategory.words.length > 0" ngModelGroup="words" #wordsGroup="ngModelGroup">
                 <table mat-table [dataSource]="currentCategory.words">
                     <ng-container matColumnDef="Origin">
                         <th mat-header-cell *matHeaderCellDef>Origin</th>
@@ -92,7 +92,8 @@
             mat-raised-button
             color="primary"
             [disabled]="currentCategory.words.length == 0 || 
-                categoryForm.invalid">
+                categoryForm.invalid ||
+                categoryForm.pristine">
         Save Category
         </button>
     </div>
