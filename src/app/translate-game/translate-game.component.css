@@ -1,0 +1,11 @@
+.page{
+  margin: 20px;
+  width:300pt;
+}
+.page mat-form-field, .page button {
+  width:100%;
+}
+
+button{
+  margin-bottom: 20pt;
+}

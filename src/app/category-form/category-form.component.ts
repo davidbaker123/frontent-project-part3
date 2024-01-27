@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Language } from '../../shared/model/language';
 import { Category } from '../../shared/model/category';
-import { FormGroup, FormsModule, NgModelGroup } from '@angular/forms';
+import { FormsModule, NgModelGroup } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
