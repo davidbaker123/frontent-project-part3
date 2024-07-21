@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Category } from '../../shared/model/category';
+import { CategoriesService } from '../services/categories.service';
 
 @Component({
   selector: 'app-game2',
@@ -11,4 +14,16 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './game2.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Game2Component { }
+export class Game2Component implements OnInit {
+  category?: Category;
+
+  constructor(
+    private route: ActivatedRoute,
+    private categoriesService: CategoriesService
+  ) {}
+
+  ngOnInit(): void {
+    const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
+    this.category = this.categoriesService.get(id);
+  }
+}

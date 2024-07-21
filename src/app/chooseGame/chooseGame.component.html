@@ -1,15 +1,6 @@
-<h1>let's play</h1>
 <div class="card-container">
-<mat-card appearance="outlined">
-    <mat-card-content>
-      <h1> word sorting</h1><br>
-      <p>for each word the player must choose wheter the word fits the category or not </p>
-    </mat-card-content>
-  </mat-card>
-  <mat-card appearance="outlined">
-    <mat-card-content>
-        <h1>word mess</h1><br>
-    <p> Players are given a set of scrambled letters and must rearrange them to spell out a correct word</p>
-    </mat-card-content>
+  <mat-card *ngFor="let game of games" (click)="openCategoryDialog(game)">
+    <mat-card-title>{{ game.name }}</mat-card-title>
+    <mat-card-content>{{ game.gameDescription }}</mat-card-content>
   </mat-card>
 </div>

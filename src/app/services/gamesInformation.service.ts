@@ -1,22 +1,14 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
+import { GameProfile } from '../../shared/model/gameProfile';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameProfileService {
   private games: GameProfile[] = [
-    {
-      id: 1,
-      name: 'word sorting',
-      gameDescription: 'word sorting game',
-      urlAddress: 'game1/:id'
-    },
-    {
-      id: 2,
-      name: 'word mess',
-      gameDescription: 'word mess game',
-      urlAddress: 'game2/:id'
-    }
+    new GameProfile(1, 'Word Sorting', 'Word sorting game', 'game1/:id'),
+    new GameProfile(2, 'Word Mess', 'Word mess game', 'game2/:id')
   ];
 
   constructor() {}
@@ -24,11 +16,4 @@ export class GameProfileService {
   getGames(): GameProfile[] {
     return this.games;
   }
-}
-
-export interface GameProfile {
-  id: number;
-  name: string;
-  gameDescription: string;
-  urlAddress: string;
 }
