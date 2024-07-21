@@ -67,3 +67,5 @@ export class CategoriesService {
     this.setNextId(++category.id);
   }
 }
+
+

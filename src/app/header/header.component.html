@@ -2,11 +2,11 @@
     <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>menu</mat-icon>
     </button>
-    Little Linguist
+    <button mat-menu-item routerLink="dashboard" class="title" >Little Linguist</button>
     <span class="example-spacer"></span>
     <mat-icon>perm_identity</mat-icon>
 </mat-toolbar>
 <mat-menu #menu="matMenu">
-  <button mat-menu-item>Admin</button>
-  <button mat-menu-item>Let's Play</button>
+  <button mat-menu-item routerLink="" >Admin</button>
+  <button mat-menu-item routerLink="let's_play">Let's Play</button>
 </mat-menu>

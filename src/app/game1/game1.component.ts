@@ -1,17 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-footer',
+  selector: 'app-game1',
   standalone: true,
   imports: [
-    CommonModule, MatIconModule,MatToolbarModule,RouterLink,RouterModule,
+    CommonModule,RouterLink,RouterModule,MatToolbarModule,
   ],
-  templateUrl: './footer.component.html',
-  styleUrl: './footer.component.css',
+  templateUrl: './game1.component.html',
+  styleUrl: './game1.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FooterComponent { }
+export class Game1Component {
+  
+ }
