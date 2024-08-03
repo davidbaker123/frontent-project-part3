@@ -1,5 +1,5 @@
-<div class="card-container">
-  <mat-card *ngFor="let game of games" (click)="openCategoryDialog(game)">
+<div class="card-container" >
+  <mat-card *ngFor="let game of games" (click)="openCategoryDialog(game) " >
     <mat-card-title>{{ game.name }}</mat-card-title>
     <mat-card-content>{{ game.gameDescription }}</mat-card-content>
   </mat-card>

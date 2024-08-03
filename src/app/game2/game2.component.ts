@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from '../../shared/model/category';
 import { CategoriesService } from '../services/categories.service';
@@ -15,6 +15,7 @@ import { CategoriesService } from '../services/categories.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Game2Component implements OnInit {
+  @Input()
   category?: Category;
 
   constructor(

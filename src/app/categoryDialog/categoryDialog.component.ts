@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -8,6 +8,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CategoriesService } from '../services/categories.service';
 import { Category } from '../../shared/model/category';
 import { GameProfile } from '../../shared/model/gameProfile';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -18,15 +19,19 @@ import { GameProfile } from '../../shared/model/gameProfile';
   selector: 'app-category-dialog',
   standalone: true,
   imports: [
-    CommonModule,MatFormFieldModule,MatSelectModule,MatDialogModule,
+    CommonModule,MatFormFieldModule,MatSelectModule,MatDialogModule,MatButtonModule,
   ],
   templateUrl: './categoryDialog.component.html',
   styleUrl: './categoryDialog.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryDialogComponent {
+ @Input()
+ 
+
   categories: Category[] = [];
   selectedCategory?: Category;
+game: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { game: GameProfile },
@@ -36,6 +41,7 @@ export class CategoryDialogComponent {
   }
 
   onCategoryChange() {
-    // This will be triggered when a category is selected
+
   }
+  
 }

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CategoriesService } from '../services/categories.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { GameProfile } from '../../shared/model/gameProfile';
 import { Category } from '../../shared/model/category';
 import { CategoryDialogComponent } from '../categoryDialog/categoryDialog.component';
@@ -14,10 +14,12 @@ import { GameProfileService } from '../services/gamesInformation.service';
   standalone: true,
   templateUrl: './chooseGame.component.html',
   styleUrls: ['./chooseGame.component.css'],
-  imports: [MatCardModule,NgFor],
+  imports: [MatCardModule,RouterLink,NgFor,],
 })
 export class ChooseGameComponent implements OnInit {
+@Input()
   games: GameProfile[] = [];
+  game: any;
 
   constructor(
     private gameProfileService: GameProfileService,
@@ -35,10 +37,13 @@ export class ChooseGameComponent implements OnInit {
       data: { game }
     });
 
-    dialogRef.afterClosed().subscribe((result: Category) => {
+
+
+
+   dialogRef.afterClosed().subscribe((result: Category) => {
       if (result) {
         this.router.navigate([game.urlAddress.replace(':id', result.id.toString())]);
-      }
+     }
     });
-  }
+}
 }
