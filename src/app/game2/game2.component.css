@@ -1,3 +1,7 @@
-h2{
+h1{
   text-align: center;
+}
+
+.ProgressBar{
+  margin: 20px;
 }

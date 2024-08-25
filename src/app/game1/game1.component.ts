@@ -4,12 +4,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
 import { Category } from '../../shared/model/category';
 import { CategoriesService } from '../services/categories.service';
+import { ExitIconComponent } from '../exit-icon/exit-icon.component';
 
 @Component({
   selector: 'app-game1',
   standalone: true,
   imports: [
-    CommonModule,RouterLink,RouterModule,MatToolbarModule,
+    CommonModule,RouterLink,RouterModule,MatToolbarModule,ExitIconComponent,
   ],
   templateUrl: './game1.component.html',
   styleUrl: './game1.component.css',

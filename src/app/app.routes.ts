@@ -17,4 +17,6 @@ export const routes: Routes = [
     {path: "help", component: HelpComponent},
     {path: "game1/:id", component: Game1Component},
     {path: "game2/:id", component: Game2Component},
+    {path: "exit", component: ChooseGameComponent},
+    
 ];
