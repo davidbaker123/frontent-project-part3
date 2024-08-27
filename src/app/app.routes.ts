@@ -6,6 +6,7 @@ import { HelpComponent } from './help/help.component';
 import { ChooseGameComponent } from './chooseGame/chooseGame.component';
 import { Game1Component } from './game1/game1.component';
 import { Game2Component } from './game2/game2.component';
+import { EndOfGameComponent } from './end-of-game/end-of-game.component';
 import { FooterComponent } from './footer/footer.component';
 
 export const routes: Routes = [
@@ -17,6 +18,7 @@ export const routes: Routes = [
     {path: "help", component: HelpComponent},
     {path: "game1/:id", component: Game1Component},
     {path: "game2/:id", component: Game2Component},
+    {path: "endofgame", component: EndOfGameComponent},
     {path: "exit", component: ChooseGameComponent},
     
 ];

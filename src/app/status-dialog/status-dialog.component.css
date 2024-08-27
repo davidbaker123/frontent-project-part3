@@ -1,0 +1,12 @@
+.dialog {
+  padding: 20px;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+}
+.success {
+  background-color: green;
+}
+.failure {
+  background-color: red;
+}

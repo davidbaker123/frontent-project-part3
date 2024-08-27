@@ -1,3 +1,76 @@
-h2{
-  text-align: center;
+.containerh2 {
+  display: grid;
+  place-items: center;
+  height: 10px; 
 }
+.r {
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px;
+  border: 2px solid
+  #ccc;
+  border-radius: 8px;
+  background-color:
+  #f9f9f9;
+  width: 80%;
+  box-shadow: 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f0f0f0;
+  max-width: 700px; 
+
+  }
+
+.r h1 {
+  margin-bottom:20px;
+  color:#333;
+  font-size: 24px;
+  }
+
+.r .mix-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.r .mix-game span {
+  text-align: left; 
+  width: 100%; 
+}
+
+.r .mix-game input {
+  padding: 10px;
+  font-size: 24px;
+  margin: 5px;
+  }
+
+  .r .button-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px; 
+  }
+  
+  .r .button-row button {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  .input-container {
+    display: flex;
+    justify-content: flex-start; /* יישור לשמאל */
+    width: 100%;
+  }
+
+  .input-container mat-form-field {
+    max-width: 200px;
+    width: 100%;
+  }
+  .input-container mat-form-field {
+    max-width: 150px; /* או כל רוחב שתרצה */
+    width: 100%;
+  }
+  
+
+  
+
+  
