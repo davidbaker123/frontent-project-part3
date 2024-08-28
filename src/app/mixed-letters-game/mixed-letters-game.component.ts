@@ -18,6 +18,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { SuccessDialogComponentComponent } from '../SuccessDialogComponent/SuccessDialogComponent.component';
 import { FailureDialogComponentComponent } from '../FailureDialogComponent/FailureDialogComponent.component';
+import { ScoreComponent } from '../score/score.component';
+import { EndOfGameComponent } from '../end-of-game/end-of-game.component';
 
 
 
@@ -40,7 +42,7 @@ import { FailureDialogComponentComponent } from '../FailureDialogComponent/Failu
     MatIconModule, 
     MatDialogModule,
     MatInputModule,
-    MatProgressBarModule,SuccessDialogComponentComponent,FailureDialogComponentComponent,
+    MatProgressBarModule,SuccessDialogComponentComponent,FailureDialogComponentComponent,ScoreComponent,EndOfGameComponent,
 
   ],
   templateUrl: './mixed-letters-game.component.html',
@@ -54,6 +56,11 @@ export class Game1Component implements OnInit {
   currentGuess: string = '';
   mixedWord: string = '';
   totalWords: number = 0;
+  score: number = 0;
+  pointsPerWord: number = 0;
+
+
+
 
   constructor(
     private route: ActivatedRoute,
@@ -68,6 +75,7 @@ export class Game1Component implements OnInit {
     this.words = this.category?.words || [];
     this.totalWords = this.words.length;
     this.nextWord();
+    this.pointsPerWord = 100 / this.totalWords;
   }
 
   nextWord() {
@@ -84,10 +92,12 @@ export class Game1Component implements OnInit {
 
   submit() {
     if (this.currentGuess.toLowerCase() === this.words[this.currentIndex].origin.toLowerCase()) {
+      
       this.dialog.open(SuccessDialogComponentComponent).afterClosed().subscribe(() => {
         this.currentIndex++;
         this.currentGuess = '';
         this.nextWord();
+        this.score = Math.floor(this.score + this.pointsPerWord); 
       });
     } else {
       this.dialog.open(FailureDialogComponentComponent).afterClosed().subscribe(() => {

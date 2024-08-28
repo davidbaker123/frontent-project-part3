@@ -1,3 +1,11 @@
-:host {
-  display: block;
+.score {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+mat-icon {
+  margin-right: 8px;
+  color: gold; /* You can adjust the color to match your theme */
 }
