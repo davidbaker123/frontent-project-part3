@@ -1,0 +1,33 @@
+<app-exit-icon></app-exit-icon>
+
+
+<form #mixGameForm="ngForm" (ngSubmit)="submit()">
+  <div class="r">
+    <h1>Mixed Letters - {{ category?.name }}</h1>
+    <div class="mix-game">
+      <span>Hebrew word: {{ words[currentIndex]?.target }}</span><br>
+      <span>English mixed word: {{ mixedWord }}</span>
+      <div class="input-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Your Guess:</mat-label>
+          <input matInput placeholder="Enter your guess"
+                 [(ngModel)]="currentGuess"
+                 name="guess"
+                 #guessField="ngModel"
+                 required />
+        </mat-form-field>
+      </div>
+      <div class="button-row">
+        <button type="button" mat-raised-button color="primary" (click)="reset()">Reset</button>
+        <button type="submit" mat-raised-button color="primary" [disabled]="mixGameForm.invalid">Submit</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="progress-bar-container">
+  <mat-progress-bar [value]="progressPercentage"></mat-progress-bar>
+  <div class="progress-info">
+    <span>{{ currentIndex + 1 }} / {{ totalWords }}</span>
+  </div>
+</div>

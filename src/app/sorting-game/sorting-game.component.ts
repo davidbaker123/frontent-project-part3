@@ -16,8 +16,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     CommonModule, MatIconModule, RouterLink, RouterModule,
     ExitIconComponent,MatProgressBarModule,
 ],
-  templateUrl: './game2.component.html',
-  styleUrl: './game2.component.css',
+  templateUrl: './sorting-game.component.html',
+  styleUrl: './sorting-game.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Game2Component implements OnInit {

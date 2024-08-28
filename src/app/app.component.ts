@@ -6,8 +6,10 @@ import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HelpComponent } from './help/help.component';
 import { ChooseGameComponent } from './chooseGame/chooseGame.component';
-import { Game1Component } from './game1/game1.component';
-import { Game2Component } from './game2/game2.component';
+import { Game1Component } from './mixed-letters-game/mixed-letters-game.component';
+import { Game2Component } from './sorting-game/sorting-game.component';
+
+
 
 @Component({
   selector: 'app-root',
