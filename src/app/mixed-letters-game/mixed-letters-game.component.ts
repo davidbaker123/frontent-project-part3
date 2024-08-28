@@ -19,7 +19,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { SuccessDialogComponentComponent } from '../SuccessDialogComponent/SuccessDialogComponent.component';
 import { FailureDialogComponentComponent } from '../FailureDialogComponent/FailureDialogComponent.component';
 import { ScoreComponent } from '../score/score.component';
-import { EndOfGameComponent } from '../end-of-game/end-of-game.component';
+
 
 
 
@@ -42,7 +42,7 @@ import { EndOfGameComponent } from '../end-of-game/end-of-game.component';
     MatIconModule, 
     MatDialogModule,
     MatInputModule,
-    MatProgressBarModule,SuccessDialogComponentComponent,FailureDialogComponentComponent,ScoreComponent,EndOfGameComponent,
+    MatProgressBarModule,SuccessDialogComponentComponent,FailureDialogComponentComponent,ScoreComponent,
 
   ],
   templateUrl: './mixed-letters-game.component.html',
@@ -61,7 +61,6 @@ export class Game1Component implements OnInit {
 
 
 
-
   constructor(
     private route: ActivatedRoute,
     private categoriesService: CategoriesService,
@@ -74,6 +73,8 @@ export class Game1Component implements OnInit {
     this.category = this.categoriesService.get(id);
     this.words = this.category?.words || [];
     this.totalWords = this.words.length;
+
+
     this.nextWord();
     this.pointsPerWord = 100 / this.totalWords;
   }
@@ -114,5 +115,4 @@ export class Game1Component implements OnInit {
 
   get progressPercentage(): number {
     return (this.currentIndex / this.totalWords) * 100;
-  }
-}
+  }}
