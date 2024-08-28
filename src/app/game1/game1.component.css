@@ -34,7 +34,7 @@
 }
 
 .r .mix-game span {
-  text-align: left; 
+  text-align: center; 
   width: 100%; 
 }
 
@@ -57,7 +57,7 @@
   }
   .input-container {
     display: flex;
-    justify-content: flex-start; /* יישור לשמאל */
+    justify-content: flex-start; 
     width: 100%;
   }
 
@@ -66,7 +66,7 @@
     width: 100%;
   }
   .input-container mat-form-field {
-    max-width: 150px; /* או כל רוחב שתרצה */
+    max-width: 150px; 
     width: 100%;
   }
   

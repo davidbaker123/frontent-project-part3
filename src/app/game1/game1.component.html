@@ -21,8 +21,8 @@
               <span>Hebrew word: {{ words[index]["target"] }}</span>
               <br>
               <span>English mixed word: {{ mixWord }}</span>
+              <h4>Your Guess:</h4>
               <mat-form-field appearance="fill">
-                  <mat-label>Guess:</mat-label>
                   <input matInput placeholder="Enter your guess"
                   [(ngModel)]="words[index]['guess']"
                   name="guess"

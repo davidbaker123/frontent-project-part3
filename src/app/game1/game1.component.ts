@@ -76,11 +76,11 @@ nextWord() {
         this.mixWord = [...this.words[this.index]['origin']]
           .sort(() => Math.random() - 0.5)
           .join(' ');
-         //TODO:(valid target word) while(this.mixWord===this.words[this.index]['origin']){
-          //   this.mixWord = [...this.words[this.index]['origin']]
-          //   .sort(() => Math.random() - 0.5)
-          //   .join(' ');
-          // }
+           while(this.mixWord===this.words[this.index]['origin']){
+            this.mixWord = [...this.words[this.index]['origin']]
+            .sort(() => Math.random() - 0.5)
+            .join(' ');
+          }
       }
       
     }
