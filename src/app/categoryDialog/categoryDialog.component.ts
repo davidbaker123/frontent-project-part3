@@ -31,7 +31,6 @@ export class CategoryDialogComponent {
 
   categories: Category[] = [];
   selectedCategory?: Category;
-game: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { game: GameProfile },

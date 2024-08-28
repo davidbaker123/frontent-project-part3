@@ -54,6 +54,7 @@ export class Game1Component implements OnInit {
   currentGuess: string = '';
   mixedWord: string = '';
   totalWords: number = 0;
+  failures: boolean[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -67,14 +68,16 @@ export class Game1Component implements OnInit {
     this.category = this.categoriesService.get(id);
     this.words = this.category?.words || [];
     this.totalWords = this.words.length;
+    this.failures = new Array(this.totalWords).fill(false);
     this.nextWord();
   }
 
   nextWord() {
     if (this.currentIndex < this.words.length) {
-      this.mixedWord = this.shuffle(this.words[this.currentIndex].origin);
+      do{this.mixedWord = this.shuffle(this.words[this.currentIndex].origin)} while(this.mixedWord===this.words[this.currentIndex].origin);
     } else {
-      this.router.navigate(['endofgame']);
+      console.log(this.failures);
+      this.router.navigate(['endofgame'],{queryParams:{failures:JSON.stringify(this.failures),words:JSON.stringify(this.words)}});
     }
   }
 
@@ -85,17 +88,20 @@ export class Game1Component implements OnInit {
   submit() {
     if (this.currentGuess.toLowerCase() === this.words[this.currentIndex].origin.toLowerCase()) {
       this.dialog.open(SuccessDialogComponentComponent).afterClosed().subscribe(() => {
-        this.currentIndex++;
+      });
+      this.currentIndex++;
         this.currentGuess = '';
         this.nextWord();
-      });
+
     } else {
       this.dialog.open(FailureDialogComponentComponent).afterClosed().subscribe(() => {
+      });
+      this.failures[this.currentIndex] = true;
         this.currentIndex++;
         this.currentGuess = '';
         this.nextWord();
-      });
     }
+    
   }
 
   reset() {
@@ -106,3 +112,5 @@ export class Game1Component implements OnInit {
     return (this.currentIndex / this.totalWords) * 100;
   }
 }
+
+
