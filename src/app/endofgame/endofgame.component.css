@@ -1,3 +1,35 @@
-:host {
-  display: block;
+.summary {
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  width: 80%;
+  box-shadow: 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f0f0f0;
+  max-width: 700px; 
+}
+
+.summary h1, .summary h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 24px;
+}
+
+.word-summary {
+  margin-top: 20px;
+  width: 100%;
+  text-align: left;
+}
+
+.button-new-game {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.button-new-game button {
+  padding: 10px 20px;
+  font-size: 16px;
 }

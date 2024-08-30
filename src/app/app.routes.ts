@@ -6,7 +6,7 @@ import { HelpComponent } from './help/help.component';
 import { ChooseGameComponent } from './chooseGame/chooseGame.component';
 import { Game1Component } from './mixed-letters-game/mixed-letters-game.component';
 import { Game2Component } from './sorting-game/sorting-game.component';
-import { EndofgameComponent } from './endofgame/endofgame.component';
+import { EndOfGameComponent } from './endofgame/endofgame.component';
 
 
 export const routes: Routes = [
@@ -19,7 +19,7 @@ export const routes: Routes = [
     {path: "help", component: HelpComponent},
     {path: "mixed-letters-game/:id", component: Game1Component},
     {path: "sorting-game/:id", component: Game2Component},
-    {path: "endofgame", component: EndofgameComponent},
+    {path: "endofgame", component: EndOfGameComponent},
     {path: "exit", component: ChooseGameComponent},
     
 ];

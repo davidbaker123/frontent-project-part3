@@ -21,8 +21,6 @@ import { FailureDialogComponentComponent } from '../FailureDialogComponent/Failu
 import { ScoreComponent } from '../score/score.component';
 
 
-
-
 @Component({
   selector: 'mixed-letters-game',
   standalone: true,
@@ -42,7 +40,10 @@ import { ScoreComponent } from '../score/score.component';
     MatIconModule, 
     MatDialogModule,
     MatInputModule,
-    MatProgressBarModule,SuccessDialogComponentComponent,FailureDialogComponentComponent,ScoreComponent,
+    MatProgressBarModule,
+    SuccessDialogComponentComponent,
+    FailureDialogComponentComponent,
+    ScoreComponent
 
   ],
   templateUrl: './mixed-letters-game.component.html',
@@ -56,10 +57,9 @@ export class Game1Component implements OnInit {
   currentGuess: string = '';
   mixedWord: string = '';
   totalWords: number = 0;
+  failures: boolean[] = [];
   score: number = 0;
   pointsPerWord: number = 0;
-
-
 
   constructor(
     private route: ActivatedRoute,
@@ -73,17 +73,18 @@ export class Game1Component implements OnInit {
     this.category = this.categoriesService.get(id);
     this.words = this.category?.words || [];
     this.totalWords = this.words.length;
-
-
+    this.failures = new Array(this.totalWords).fill(false);
     this.nextWord();
     this.pointsPerWord = 100 / this.totalWords;
   }
 
+
   nextWord() {
     if (this.currentIndex < this.words.length) {
-      this.mixedWord = this.shuffle(this.words[this.currentIndex].origin);
+      do{this.mixedWord = this.shuffle(this.words[this.currentIndex].origin)} while(this.mixedWord===this.words[this.currentIndex].origin);
     } else {
-      this.router.navigate(['endofgame']);
+      console.log(this.failures);
+      this.router.navigate(['endofgame'],{queryParams:{failures:JSON.stringify(this.failures),words:JSON.stringify(this.words)}});
     }
   }
 
@@ -91,23 +92,26 @@ export class Game1Component implements OnInit {
     return word.split('').sort(() => Math.random() - 0.5).join('');
   }
 
+
   submit() {
     if (this.currentGuess.toLowerCase() === this.words[this.currentIndex].origin.toLowerCase()) {
-      
       this.dialog.open(SuccessDialogComponentComponent).afterClosed().subscribe(() => {
-        this.currentIndex++;
+      });
+      this.currentIndex++;
         this.currentGuess = '';
         this.nextWord();
         this.score = Math.floor(this.score + this.pointsPerWord); 
-      });
-    } else {
+      } else {
       this.dialog.open(FailureDialogComponentComponent).afterClosed().subscribe(() => {
+      });
+      this.failures[this.currentIndex] = true;
         this.currentIndex++;
         this.currentGuess = '';
         this.nextWord();
-      });
     }
+    
   }
+
 
   reset() {
     this.currentGuess = '';

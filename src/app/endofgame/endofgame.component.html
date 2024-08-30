@@ -1,1 +1,21 @@
-<p>endofgame works!</p>,
+<app-exit-icon></app-exit-icon>
+
+<div class="summary">
+  <h1>Grade: {{ Math.floor(100 * numSuccesses / words.length) }}</h1>
+  <h2>You translated {{ numSuccesses }} out of {{ words.length }} words correctly</h2>
+
+  <table *ngFor="let word of words; let i = index" class="word-summary">
+    <tr>
+      <th>Origin: {{ word.origin }}</th>
+      <th>Target: {{ word.target }}</th>
+      <th>
+        <mat-icon *ngIf="!failures[i]">check</mat-icon>
+        <mat-icon *ngIf="failures[i]">close</mat-icon>
+      </th>
+    </tr>
+  </table> 
+
+  <div class="button-new-game">
+    <button mat-raised-button color="primary">New Game</button>
+  </div>
+</div>
