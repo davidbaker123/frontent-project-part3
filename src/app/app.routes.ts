@@ -21,5 +21,5 @@ export const routes: Routes = [
     {path: "sorting-game/:id", component: Game2Component},
     {path: "endofgame", component: EndOfGameComponent},
     {path: "exit", component: ChooseGameComponent},
-    
+    {path: "newgame", component: ChooseGameComponent},
 ];

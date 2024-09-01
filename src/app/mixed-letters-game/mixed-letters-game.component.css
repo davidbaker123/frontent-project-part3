@@ -1,5 +1,5 @@
 
-.r {
+.form {
   text-align: center;
   margin: 0 auto;
   padding: 20px;
@@ -12,13 +12,13 @@
   max-width: 700px; 
   }
 
-.r h1 {
+.form h1 {
   margin-bottom:20px;
   color:#333;
   font-size: 24px;
   }
 
-.r .mix-game {
+.form .mix-game {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,25 +27,25 @@
 
 }
 
-.r .mix-game span {
+.form .mix-game span {
   text-align: center; 
   width: 100%; 
 }
 
-.r .mix-game input {
+.form .mix-game input {
   padding: 10px;
   font-size: 24px;
   margin: 5px;
   }
 
-  .r .button-row {
+  .form .button-row {
     display: flex;
     justify-content: center;
     gap: 10px;
     margin-top: 20px; 
   }
   
-  .r .button-row button {
+  .form .button-row button {
     padding: 10px 20px;
     font-size: 16px;
   }
@@ -60,18 +60,39 @@
     width: 100%;
   }
 
-  .progress-bar-container{
+  .progress-bar-container {
+    display: flex;
+    align-items: center;
     margin: 20px;
+    position: relative;
+  }
+  
+  .progress-info-left {
+    position: absolute;
+    left: 0;
+    padding-left: 10px; 
+  }
+  
+  .progress-info-right {
+    position: absolute;
+    right: 0;
+    padding-right: 10px; 
+  }
+  
+  mat-progress-bar {
+    flex: 1;
+    margin: 0 40px; 
   }
 
   .input::placeholder {
-    font-size: 13px; 
+    font-size: 10px; 
     color: #1f1a1a;
   }
 
   app-score {
     flex: 1;
     text-align: right;
+    
   }
   
   

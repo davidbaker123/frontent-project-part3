@@ -6,6 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Category } from '../../shared/model/category';
 import { ExitIconComponent } from "../exit-icon/exit-icon.component";
+import { MatTableModule } from '@angular/material/table';
+import { CategoriesService } from '../services/categories.service';
 
 
 
@@ -18,17 +20,21 @@ import { ExitIconComponent } from "../exit-icon/exit-icon.component";
     RouterModule,
     MatIconModule,
     MatButtonModule,
-    ExitIconComponent
+    ExitIconComponent,
 ],
   templateUrl: './endofgame.component.html',
   styleUrl: './endofgame.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EndOfGameComponent {
+[x: string]: any;
   @Input() words: TranslatedWord[] = [];
   failures: boolean[] = [];
   numSuccesses : number = 0;
   Math=Math;
+
+
+
 
 
   constructor(

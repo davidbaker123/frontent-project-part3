@@ -1,4 +1,7 @@
 .score {
+  position: absolute;
+  top: 80px;
+  right: 20px;
   display: flex;
   align-items: center;
   font-size: 24px;
@@ -7,5 +10,5 @@
 
 mat-icon {
   margin-right: 8px;
-  color: gold; /* You can adjust the color to match your theme */
+  color: gold;
 }

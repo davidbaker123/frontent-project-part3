@@ -2,7 +2,7 @@
 
 
 <form #mixGameForm="ngForm" (ngSubmit)="submit()">
-  <div class="r">
+  <div class="form">
     <h1>Mixed Letters - {{ category?.name }}</h1>
     <div class="mix-game">
       <span>Hebrew word: {{ words[currentIndex]?.target }}</span><br>
@@ -14,7 +14,9 @@
                  [(ngModel)]="currentGuess"
                  name="guess"
                  #guessField="ngModel"
-                 required />
+                 required 
+                 pattern="^[a-zA-Z]+$"
+                 />
         </mat-form-field>
       </div>
       <div class="button-row">
@@ -26,9 +28,13 @@
 </form>
 
 <app-score [currentScore]="score"></app-score>
+
 <div class="progress-bar-container">
+  <div class="progress-info-left">
+    <span>{{ currentIndex + 1 }}</span> 
+  </div>
   <mat-progress-bar [value]="progressPercentage"></mat-progress-bar>
-  <div class="progress-info">
-    <span>{{ currentIndex + 1 }} / {{ totalWords }}</span>
+  <div class="progress-info-right">
+    <span>{{ totalWords }}</span>
   </div>
 </div>

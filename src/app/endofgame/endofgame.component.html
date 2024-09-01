@@ -1,13 +1,14 @@
 <app-exit-icon></app-exit-icon>
 
 <div class="summary">
-  <h1>Grade: {{ Math.floor(100 * numSuccesses / words.length) }}</h1>
-  <h2>You translated {{ numSuccesses }} out of {{ words.length }} words correctly</h2>
+    <h1> Mixed Letters  -  Results</h1>
+  <h3>Grade: {{ Math.ceil(100 * numSuccesses / words.length) }}</h3>
+  <h3>You translated {{ numSuccesses }} out of {{ words.length }} words correctly</h3>
 
   <table *ngFor="let word of words; let i = index" class="word-summary">
     <tr>
-      <th>Origin: {{ word.origin }}</th>
-      <th>Target: {{ word.target }}</th>
+        <th> Origin: {{ word.target }}</th>
+      <th>Target: {{ word.origin }}</th>
       <th>
         <mat-icon *ngIf="!failures[i]">check</mat-icon>
         <mat-icon *ngIf="failures[i]">close</mat-icon>
@@ -16,6 +17,6 @@
   </table> 
 
   <div class="button-new-game">
-    <button mat-raised-button color="primary">New Game</button>
+    <button mat-raised-button color="primary" routerLink="/newgame">New Game</button>
   </div>
 </div>
