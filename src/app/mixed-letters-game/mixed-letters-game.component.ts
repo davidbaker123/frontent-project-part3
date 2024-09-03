@@ -1,15 +1,13 @@
-import { GameProfileService } from '../services/gamesInformation.service';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, NgModule, OnInit,  } from '@angular/core';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
+import { ChangeDetectionStrategy, Component, OnInit,  } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../../shared/model/category';
 import { CategoriesService } from '../services/categories.service';
 import { ExitIconComponent } from '../exit-icon/exit-icon.component';
 import { TranslatedWord } from '../../shared/model/translated-word';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { ExitDialogComponent } from '../exit-dialog/exit-dialog.component';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -22,29 +20,12 @@ import { ScoreComponent } from '../score/score.component';
 
 
 @Component({
-  selector: 'mixed-letters-game',
+  selector: 'app-mixed-letters-game',
   standalone: true,
   imports: [
-    CommonModule,
-    RouterLink,
-    RouterModule,
-    MatToolbarModule,
-    ExitIconComponent,
-    ExitDialogComponent,
-    MatIconModule,
-    MatFormFieldModule,
-    FormsModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatTabsModule,
-    MatIconModule, 
-    MatDialogModule,
-    MatInputModule,
-    MatProgressBarModule,
-    SuccessDialogComponentComponent,
-    FailureDialogComponentComponent,
-    ScoreComponent
-
+    CommonModule,ExitIconComponent,ExitDialogComponent,MatFormFieldModule,FormsModule,
+     MatButtonModule,MatTabsModule, MatIconModule, MatDialogModule,MatInputModule,MatProgressBarModule,
+      SuccessDialogComponentComponent,FailureDialogComponentComponent, ScoreComponent
   ],
   templateUrl: './mixed-letters-game.component.html',
   styleUrl: './mixed-letters-game.component.css',
@@ -81,10 +62,12 @@ export class Game1Component implements OnInit {
 
   nextWord() {
     if (this.currentIndex < this.words.length) {
-      do{this.mixedWord = this.shuffle(this.words[this.currentIndex].origin)} while(this.mixedWord===this.words[this.currentIndex].origin);
+      do{this.mixedWord = this.shuffle(this.words[this.currentIndex].origin)}
+       while(this.mixedWord===this.words[this.currentIndex].origin);
     } else {
       console.log(this.failures);
-      this.router.navigate(['endofgame'],{queryParams:{failures:JSON.stringify(this.failures),words:JSON.stringify(this.words)}});
+      this.router.navigate(['endofgame'],{queryParams:{failures:JSON.stringify(this.failures),
+        words:JSON.stringify(this.words)}});
     }
   }
 

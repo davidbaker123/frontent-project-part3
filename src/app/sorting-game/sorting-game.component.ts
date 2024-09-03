@@ -4,9 +4,7 @@ import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
 import { Category } from '../../shared/model/category';
 import { CategoriesService } from '../services/categories.service';
 import { MatIconModule } from '@angular/material/icon';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { ExitIconComponent } from "../exit-icon/exit-icon.component";
-import { CategoryFormComponent } from '../category-form/category-form.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
@@ -21,10 +19,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Game2Component implements OnInit {
-[x: string]: any;
   @Input()
   category?: Category;
-logout: any;
+
 
   constructor(
     private route: ActivatedRoute,

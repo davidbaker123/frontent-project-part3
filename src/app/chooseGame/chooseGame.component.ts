@@ -1,10 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CategoriesService } from '../services/categories.service';
 import { Router, RouterLink } from '@angular/router';
 import { GameProfile } from '../../shared/model/gameProfile';
 import { Category } from '../../shared/model/category';
-import { CategoryDialogComponent } from '../categoryDialog/categoryDialog.component';
+import { CategoryDialogComponent } from '../category-dialog/categoryDialog.component';
 import { MatCardModule } from '@angular/material/card';
 import { NgFor } from '@angular/common';
 import { GameProfileService } from '../services/gamesInformation.service';
@@ -19,14 +18,12 @@ import { GameProfileService } from '../services/gamesInformation.service';
 export class ChooseGameComponent implements OnInit {
 @Input()
   games: GameProfile[] = [];
-  game: any;
+ 
 
   constructor(
     private gameProfileService: GameProfileService,
     private dialog: MatDialog,
-    private router: Router,
-    private categoriesService: CategoriesService
-  ) {}
+    private router: Router  ) {}
 
   ngOnInit(): void {
     this.games = this.gameProfileService.getGames();

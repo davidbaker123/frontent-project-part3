@@ -1,13 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { TranslatedWord } from '../../shared/model/translated-word';
 import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { Category } from '../../shared/model/category';
 import { ExitIconComponent } from "../exit-icon/exit-icon.component";
 import { MatTableModule } from '@angular/material/table';
-import { CategoriesService } from '../services/categories.service';
 
 
 
@@ -21,21 +19,18 @@ import { CategoriesService } from '../services/categories.service';
     MatIconModule,
     MatButtonModule,
     ExitIconComponent,
+    MatTableModule,
 ],
   templateUrl: './endofgame.component.html',
   styleUrl: './endofgame.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EndOfGameComponent {
-[x: string]: any;
+export class EndOfGameComponent implements OnInit {
   @Input() words: TranslatedWord[] = [];
   failures: boolean[] = [];
-  numSuccesses : number = 0;
-  Math=Math;
-
-
-
-
+  numSuccesses: number = 0;
+  Math = Math;
+  displayedColumns: string[] = ['origin', 'target', 'status'];
 
   constructor(
     private route: ActivatedRoute,
@@ -43,7 +38,7 @@ export class EndOfGameComponent {
 
   ngOnInit(){
     this.route.queryParams.subscribe((params: {
-      [x: string]: any;
+      [x: string]: "";
     }) => {
       this.failures = JSON.parse(params['failures']);
       this.words = JSON.parse(params['words']);

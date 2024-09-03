@@ -17,7 +17,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExitIconComponent {
-answar: any; 
+
   constructor(private dialog: MatDialog, private router: Router) {}
 
   openExitDialog(): void {
