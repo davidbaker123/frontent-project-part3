@@ -2,3 +2,10 @@
   display: flex;
   justify-content: center;
 }
+
+mat-progress-spinner{
+  display: block;
+  justify-content: center;
+  align-items: center;
+  height:100vh
+}

@@ -1,0 +1,16 @@
+mat-card {
+  flex: 1; 
+  text-align: center;
+  border-radius: 12px; 
+  overflow: hidden; 
+  width: 150px; 
+  height: 150px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  margin: 10px; 
+}
+
+mat-card-title {
+  margin-bottom: 10px; 
+}

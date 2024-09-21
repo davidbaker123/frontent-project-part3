@@ -8,33 +8,60 @@ import { Category } from '../../shared/model/category';
 import { CategoriesService } from '../services/categories.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteCategoryDialogComponent } from '../delete-category-dialog/delete-category-dialog.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-categories-list',
   standalone: true,
   imports: [
-    CommonModule, MatTableModule, MatIconModule, MatButtonModule, RouterModule
+    CommonModule,
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    RouterModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './categories-list.component.html',
   styleUrl: './categories-list.component.css',
 })
 export class CategoriesListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'numOfWords', 'lastUpdateDate', 'actions'];
-  dataSource : Category[] = [];
-
-  constructor(private categoriesService : CategoriesService, private dialogService : MatDialog) {}
+  displayedColumns: string[] = [
+    'id',
+    'name',
+    'numOfWords',
+    'lastUpdateDate',
+    'actions',
+  ];
+  dataSource: Category[] = [];
+  isLoading = false;
+  isFullyLoaded = false;
+  constructor(
+    private categoriesService: CategoriesService,
+    private dialogService: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    this.dataSource = this.categoriesService.list();
+    this.categoriesService.list().then((result: Category[]) => {
+      this.dataSource = result;
+      this.isFullyLoaded = true;
+    });
   }
 
-  deleteCategory(id : number, name: string) {
-    const dialogRef = this.dialogService.open(DeleteCategoryDialogComponent, {data: name});
+  deleteCategory(id: string, name: string) {
+    const dialogRef = this.dialogService.open(DeleteCategoryDialogComponent, {
+      data: name,
+    });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.categoriesService.delete(id);
-        this.dataSource = this.categoriesService.list();
-      }});
+    dialogRef.afterClosed().subscribe((deletionResult) => {
+      if (deletionResult) {
+        this.isLoading = true;
+        this.categoriesService.delete(id).then(() => {
+          this.categoriesService
+            .list()
+            .then((result: Category[]) => (this.dataSource = result));
+            this.isLoading = false;
+        });
+      }
+    });
   }
 }

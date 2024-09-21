@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit,  } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../../shared/model/category';
 import { CategoriesService } from '../services/categories.service';
@@ -18,14 +18,24 @@ import { SuccessDialogComponentComponent } from '../SuccessDialogComponent/Succe
 import { FailureDialogComponentComponent } from '../FailureDialogComponent/FailureDialogComponent.component';
 import { ScoreComponent } from '../score/score.component';
 
-
 @Component({
   selector: 'app-mixed-letters-game',
   standalone: true,
   imports: [
-    CommonModule,ExitIconComponent,ExitDialogComponent,MatFormFieldModule,FormsModule,
-     MatButtonModule,MatTabsModule, MatIconModule, MatDialogModule,MatInputModule,MatProgressBarModule,
-      SuccessDialogComponentComponent,FailureDialogComponentComponent, ScoreComponent
+    CommonModule,
+    ExitIconComponent,
+    ExitDialogComponent,
+    MatFormFieldModule,
+    FormsModule,
+    MatButtonModule,
+    MatTabsModule,
+    MatIconModule,
+    MatDialogModule,
+    MatInputModule,
+    MatProgressBarModule,
+    SuccessDialogComponentComponent,
+    FailureDialogComponentComponent,
+    ScoreComponent,
   ],
   templateUrl: './mixed-letters-game.component.html',
   styleUrl: './mixed-letters-game.component.css',
@@ -50,51 +60,67 @@ export class Game1Component implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
-    this.category = this.categoriesService.get(id);
-    this.words = this.category?.words || [];
-    this.totalWords = this.words.length;
-    this.failures = new Array(this.totalWords).fill(false);
-    this.nextWord();
-    this.pointsPerWord = 100 / this.totalWords;
-  }
+    const id = this.route.snapshot.paramMap.get('id')!;
 
+    this.categoriesService.get(id).then((category) => {
+      if (category) {
+        this.category = category;
+        this.words = category.words;
+        this.totalWords = this.words.length;
+        this.failures = new Array(this.totalWords).fill(false);
+        this.pointsPerWord = 100 / this.totalWords;
+        this.nextWord();
+      }
+    });
+  }
 
   nextWord() {
     if (this.currentIndex < this.words.length) {
-      do{this.mixedWord = this.shuffle(this.words[this.currentIndex].origin)}
-       while(this.mixedWord===this.words[this.currentIndex].origin);
+      do {
+        this.mixedWord = this.shuffle(this.words[this.currentIndex].origin);
+      } while (this.mixedWord === this.words[this.currentIndex].origin);
     } else {
       console.log(this.failures);
-      this.router.navigate(['endofgame'],{queryParams:{failures:JSON.stringify(this.failures),
-        words:JSON.stringify(this.words)}});
+      this.router.navigate(['endofgame'], {
+        queryParams: {
+          failures: JSON.stringify(this.failures),
+          words: JSON.stringify(this.words),
+        },
+      });
     }
   }
 
   shuffle(word: string): string {
-    return word.split('').sort(() => Math.random() - 0.5).join('');
+    return word
+      .split('')
+      .sort(() => Math.random() - 0.5)
+      .join('');
   }
-
 
   submit() {
-    if (this.currentGuess.toLowerCase() === this.words[this.currentIndex].origin.toLowerCase()) {
-      this.dialog.open(SuccessDialogComponentComponent).afterClosed().subscribe(() => {
-      });
+    if (
+      this.currentGuess.toLowerCase() ===
+      this.words[this.currentIndex].origin.toLowerCase()
+    ) {
+      this.dialog
+        .open(SuccessDialogComponentComponent)
+        .afterClosed()
+        .subscribe(() => {});
       this.currentIndex++;
-        this.currentGuess = '';
-        this.nextWord();
-        this.score = Math.floor(this.score + this.pointsPerWord); 
-      } else {
-      this.dialog.open(FailureDialogComponentComponent).afterClosed().subscribe(() => {
-      });
+      this.currentGuess = '';
+      this.nextWord();
+      this.score = Math.floor(this.score + this.pointsPerWord);
+    } else {
+      this.dialog
+        .open(FailureDialogComponentComponent)
+        .afterClosed()
+        .subscribe(() => {});
       this.failures[this.currentIndex] = true;
-        this.currentIndex++;
-        this.currentGuess = '';
-        this.nextWord();
+      this.currentIndex++;
+      this.currentGuess = '';
+      this.nextWord();
     }
-    
   }
-
 
   reset() {
     this.currentGuess = '';
@@ -102,4 +128,5 @@ export class Game1Component implements OnInit {
 
   get progressPercentage(): number {
     return (this.currentIndex / this.totalWords) * 100;
-  }}
+  }
+}
