@@ -40,6 +40,7 @@ export class ChooseGameComponent implements OnInit {
    dialogRef.afterClosed().subscribe((result: Category) => {
       if (result) {
         this.router.navigate([game.urlAddress.replace(':id', result.id.toString())]);
+        localStorage.setItem("categoryId" ,  result.id.toString());
      }
     });
 }

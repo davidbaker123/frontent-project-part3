@@ -16,4 +16,5 @@ import { GameResultComponent } from '../gameResult/gameResult.component';
 })
 export class DashboardComponent {
   @Input() cardsNum?:number;
+
  }
