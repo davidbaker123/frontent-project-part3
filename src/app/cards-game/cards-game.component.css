@@ -12,10 +12,14 @@ mat-card {
   background-color: #e0e0ff;
   border: 2px solid #007bff;
   padding: 15px;
+  font-size: 20px;
+  align-items: center;
+
 }
 
 mat-card-title {
   margin-bottom: 10px;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 25px;
+
 }

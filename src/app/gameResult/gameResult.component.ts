@@ -5,12 +5,15 @@ import { GameHistoryService } from "../services/game-history.service";
 import { GameResult } from "../../shared/model/game-result.";
 
 
+
+
+
 @Component({
   selector: 'app-game-result',
   standalone: true,
   imports: [
     CommonModule,
-    CardsGameComponent
+    CardsGameComponent,    
 ],
   templateUrl: './gameResult.component.html',
   styleUrl: './gameResult.component.css',
@@ -42,4 +45,8 @@ export class GameResultComponent implements OnInit {
     const count = this.games.length;
     console.log(this.games , count)
   }
+  
  }
+
+
+ 
