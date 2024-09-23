@@ -13,7 +13,7 @@ import { MatCardModule } from '@angular/material/card';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardsGameComponent { 
-  @Input() cardsNum?:number | string;
-  @Input() cardsDescription?:string;
+  @Input() cardsNum!:number | string;
+  @Input() cardsDescription!:string;
 
 }

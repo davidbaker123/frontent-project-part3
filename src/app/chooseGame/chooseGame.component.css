@@ -1,5 +1,10 @@
 h1 {
   text-align: center;
+  font-family: 'Pacifico', cursive;
+  font-size: 30px;
+  color: #4a40cf;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .card-container {
@@ -19,13 +24,17 @@ mat-card {
   border-radius: 12px; 
   overflow: hidden; 
   width: 300px; 
-  height: 200px; 
+  height: 230px; 
   display: flex;
   flex-direction: column;
   justify-content: center; 
   margin: 10px; 
+  background-color: #e0e0ff;
+  border: 2px solid #007bff;
 }
 
 mat-card-title {
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 25px;
 }
