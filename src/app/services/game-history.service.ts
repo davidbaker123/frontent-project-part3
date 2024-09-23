@@ -1,5 +1,5 @@
-import { gameHisoryConverter } from './converters/game-history-converter';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { gameHisoryConverter } from './converters/game-history-converter';
 import { GameResult } from './../../shared/model/game-result.';
 import { Injectable } from '@angular/core';
 import {

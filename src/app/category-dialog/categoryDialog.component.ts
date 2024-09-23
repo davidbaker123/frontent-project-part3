@@ -7,7 +7,7 @@ import { Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CategoriesService } from '../services/categories.service';
 import { Category } from '../../shared/model/category';
-import { GameProfile } from '../../shared/model/gameProfile';
+import { GameProfile } from '../../shared/model/game-Profile';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({

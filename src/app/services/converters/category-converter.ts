@@ -42,8 +42,8 @@ fromFirestore: (
     if (words) {
         for (let i = 0; i < words.length; ++i) {
           const translatedWord = new TranslatedWord(words[i].origin, words[i].target);
-          translatedWord.guess = words[i].wordguess; // Assign the guess value
-          category.words.push(translatedWord); // Push the created word into the category
+          translatedWord.guess = words[i].wordguess;
+          category.words.push(translatedWord); 
         }
       }
     return category;

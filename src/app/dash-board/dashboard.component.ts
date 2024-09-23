@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { GameResultComponent } from '../gameResult/gameResult.component';
+import { GameResultComponent } from '../game-Result/gameResult.component';
 
 
 @Component({

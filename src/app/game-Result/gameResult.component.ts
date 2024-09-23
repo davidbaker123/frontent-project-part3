@@ -69,7 +69,7 @@ export class GameResultComponent implements OnInit {
       (game) => game.score === 100
     ).length;
     const percentage = (gamesWithPerfectScore / this.games.length) * 100;
-    this.cardsPercent = percentage;
+    this.cardsPercent = Math.floor (percentage);
     this.cdr.detectChanges();
   }
 
@@ -104,7 +104,7 @@ export class GameResultComponent implements OnInit {
     this.categoryService.list().then((result) => {
       this.cardsNotPlayed = result.length - this.cardsNumOfCategories;
       this.cardsPercentCategory =
-        (this.cardsNumOfCategories / result.length) * 100;
+       Math.ceil ((this.cardsNumOfCategories / result.length) * 100);
       this.cdr.detectChanges();
     });
   }

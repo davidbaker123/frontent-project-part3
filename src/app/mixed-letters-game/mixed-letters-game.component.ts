@@ -14,8 +14,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { SuccessDialogComponentComponent } from '../SuccessDialogComponent/SuccessDialogComponent.component';
-import { FailureDialogComponentComponent } from '../FailureDialogComponent/FailureDialogComponent.component';
+import { SuccessDialogComponentComponent } from '../Success-Dialog/SuccessDialogComponent.component';
+import { FailureDialogComponentComponent } from '../Failure-Dialog/FailureDialogComponent.component';
 import { ScoreComponent } from '../score/score.component';
 
 @Component({

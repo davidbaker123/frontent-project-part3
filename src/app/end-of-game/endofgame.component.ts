@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
   OnInit,
 } from '@angular/core';
 import { TranslatedWord } from '../../shared/model/translated-word';
@@ -31,7 +30,7 @@ import { GameHistoryService } from '../services/game-history.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EndOfGameComponent implements OnInit {
-  @Input() words: TranslatedWord[] = [];
+ words: TranslatedWord[] = [];
   failures: boolean[] = [];
   numSuccesses: number = 0;
   Math = Math;
