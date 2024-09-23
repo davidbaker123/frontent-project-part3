@@ -46,31 +46,60 @@ export class GameResultComponent implements OnInit {
       this.findMostFrequentCategoryId();
       this.CheckNotPlayed();
       this.countConsecutiveDays();
-      this.countGamesPlayedLastMonth()
+      this.countGamesPlayedLastMonth();
     });
   }
 
   CountGames() {
-    const count = this.games.length;
-    this.cardsNumOfGames = count;
-    this.cdr.detectChanges();
-  }
+    this.categoryService.list().then((categories) => {
+      const validCategoryIds = categories.map((category) => category.id); 
+      
+      const validGames = this.games.filter((game) =>
+        validCategoryIds.includes(game.categoryId)
+      );
 
+     
+      this.cardsNumOfGames = validGames.length;
+
+      this.cdr.detectChanges();
+    });
+  }
   GetPoints() {
-    const totalScore = this.games.reduce((accumulator, currentGame) => {
-      return accumulator + currentGame.score;
-    }, 0);
-    this.cardsNum0fPoints = totalScore;
-    this.cdr.detectChanges();
+    this.categoryService.list().then((categories) => {
+      const validCategoryIds = categories.map((category) => category.id); 
+
+      
+      const validGames = this.games.filter((game) =>
+        validCategoryIds.includes(game.categoryId)
+      );
+
+      
+      const totalScore = validGames.reduce((accumulator, currentGame) => {
+        return accumulator + currentGame.score;
+      }, 0);
+
+      this.cardsNum0fPoints = totalScore;
+      this.cdr.detectChanges();
+    });
   }
 
   CheckCount100() {
-    const gamesWithPerfectScore = this.games.filter(
-      (game) => game.score === 100
-    ).length;
-    const percentage = (gamesWithPerfectScore / this.games.length) * 100;
-    this.cardsPercent = Math.floor (percentage);
-    this.cdr.detectChanges();
+    this.categoryService.list().then((categories) => {
+      const validCategoryIds = categories.map((category) => category.id);
+
+      const validGames = this.games.filter((game) =>
+        validCategoryIds.includes(game.categoryId)
+      );
+
+      const gamesWithPerfectScore = validGames.filter(
+        (game) => game.score === 100
+      ).length;
+
+      const percentage = (gamesWithPerfectScore / validGames.length) * 100;
+
+      this.cardsPercent = Math.floor(percentage);
+      this.cdr.detectChanges();
+    });
   }
 
   CheckCountCategories() {
@@ -80,40 +109,78 @@ export class GameResultComponent implements OnInit {
     this.cardsNumOfCategories = uniqueCategoryCount;
     this.cdr.detectChanges();
   }
-
   findMostFrequentCategoryId() {
-    const categoryCount = new Map<string, number>();
-    this.games.forEach((game) => {
-      const categoryId: string = game.categoryId;
-      categoryCount.set(categoryId, (categoryCount.get(categoryId) || 0) + 1);
-    });
-    let mostFrequentCategoryId = '';
-    categoryCount.forEach((count, categoryId) => {
+    this.categoryService.list().then((categories) => {
+      const validCategoryIds = new Set(
+        categories.map((category) => category.id)
+      ); 
+
+      const categoryCount = new Map<string, number>();
+
+      this.games.forEach((game) => {
+        const categoryId: string = game.categoryId;
+
+       
+        if (validCategoryIds.has(categoryId)) {
+          categoryCount.set(
+            categoryId,
+            (categoryCount.get(categoryId) || 0) + 1
+          );
+        }
+      });
+
+      let mostFrequentCategoryId = '';
       let mostFrequentCategoryCount = 0;
-      if (count > mostFrequentCategoryCount) {
-        mostFrequentCategoryCount = count;
-        mostFrequentCategoryId = categoryId;
+
+      categoryCount.forEach((count, categoryId) => {
+        if (count > mostFrequentCategoryCount) {
+          mostFrequentCategoryCount = count;
+          mostFrequentCategoryId = categoryId;
+        }
+      });
+
+     
+      if (mostFrequentCategoryId) {
+        this.categoryService.get(mostFrequentCategoryId).then((result) => {
+          this.cardsMostPlayed = result?.name || 'Unknown Category'; 
+          this.cdr.detectChanges();
+        });
+      } else {
+        this.cardsMostPlayed = 'No category found';
+        this.cdr.detectChanges();
       }
     });
-    this.categoryService.get(mostFrequentCategoryId).then((result) => {
-      this.cardsMostPlayed = result!.name;
-      this.cdr.detectChanges();
-    });
   }
+
   CheckNotPlayed() {
-    this.categoryService.list().then((result) => {
-      this.cardsNotPlayed = result.length - this.cardsNumOfCategories;
-      this.cardsPercentCategory =
-       Math.ceil ((this.cardsNumOfCategories / result.length) * 100);
+    this.categoryService.list().then((categories) => {
+      const categoryIds = categories.map((category) => category.id);
+
+      const validGames = this.games.filter((game) =>
+        categoryIds.includes(game.categoryId)
+      );
+
+      const uniquePlayedCategories = new Set(
+        validGames.map((game) => game.categoryId)
+      );
+      this.cardsNumOfCategories = uniquePlayedCategories.size;
+
+      this.cardsNotPlayed = categoryIds.length - this.cardsNumOfCategories;
+
+      this.cardsPercentCategory = Math.ceil(
+        (this.cardsNumOfCategories / categoryIds.length) * 100
+      );
+
       this.cdr.detectChanges();
     });
   }
+
   countConsecutiveDays() {
     const dateSet = new Set(
       this.games.map((game) => new Date(game.updateDate).toDateString())
     );
     const datesArray = Array.from(dateSet).map((date) => new Date(date));
-    datesArray.sort((a, b) => a.getTime() - b.getTime()); 
+    datesArray.sort((a, b) => a.getTime() - b.getTime());
     let count = 0;
     let previousDate = null;
     for (const currentDate of datesArray) {
@@ -123,7 +190,7 @@ export class GameResultComponent implements OnInit {
         if (difference === 1) {
           count++;
         } else if (difference > 1) {
-          break; 
+          break;
         }
       }
       previousDate = currentDate;
@@ -133,10 +200,25 @@ export class GameResultComponent implements OnInit {
   }
   countGamesPlayedLastMonth() {
     const oneMonthAgo = new Date();
-    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1); 
-    this.cardsMonthlyGame = this.games.filter(
-      (game) => new Date(game.updateDate) >= oneMonthAgo
-    ).length;
-    this.cdr.detectChanges();
+    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+
+    this.categoryService.list().then((categories) => {
+      const validCategoryIds = categories.map((category) => category.id);
+
+      const validGamesInLastMonth = this.games.filter(
+        (game) =>
+          validCategoryIds.includes(game.categoryId) &&
+          new Date(game.updateDate) >= oneMonthAgo
+      );
+
+      const count = Math.min(validGamesInLastMonth.length, 20);
+      this.cardsMonthlyGame = count;
+
+      if (count === 20) {
+        console.log('You achieved the challenge! 🎉');
+      }
+
+      this.cdr.detectChanges();
+    });
   }
 }
